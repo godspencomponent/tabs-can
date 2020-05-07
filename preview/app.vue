@@ -28,7 +28,15 @@
         :h="componentSize.height"
       >
         <div class="sizeTip">组件显示区域({{componentSize.width}}*{{componentSize.height}})</div>
-        <com v-bind="componentProps" ref="component"></com>
+        <div class="node" :style="nodeStyle">
+          <com v-bind="componentProps" ref="component">
+            <div style="height: 300px; background-color: #F44336;color: #fff;" slot='slot0'>slot0</div>
+            <div style="height: 100px; background-color: #9C27B0;color: #fff;" slot='slot1'>slot1</div>
+            <div style="height: 200px; background-color: #3F51B5;color: #fff;" slot='slot2'>slot2</div>
+            <div style="height: 400px; background-color: #2196F3;color: #fff;" slot='slot3'>slot3</div>
+            <div style="height: 500px; background-color: #F44336;color: #fff;" slot='slot4'>slot4</div>
+          </com>
+        </div>
       </vue-drag-resize>
       <div class="block editor" :style="editerStyle">
         <div class="title" @click="editerActive=true" @mousedown="mousedown" @mouseup="mouseup">编辑面板</div>
@@ -54,6 +62,7 @@
   import Toast from './components/Toast'
   import MessageBox from 'mint-ui/message-box/'
   import 'mint-ui/message-box/style.css'
+  import pkg from '../package.json'
 
   export default {
     components: {Toast, Loading, ImgViewer, example, com, Editor, Attribute},
@@ -147,45 +156,24 @@
             height: 720
           }
         },
-        sizeIndex: 'Mobile S',
+        sizeIndex: 'Desktop',
         isInit: false, // 是否初始化完成
         editerActive: false, // 编辑面板是否要拖拽了
         componentSize: { // 组件当前的大小
           width: 320,
           height: 480
         },
+        nodeStyle: pkg.style,
         editerPanel: {
-          x: 600,
-          y: 0,
+          x: 954,
+          y: -11,
           active: false,
           org: {x: 0, y: 0},
           start: {x: 0, y: 0},
         },
 
         // 组件开发的时候，配置传入的默认参数，按需修改，这里面的字段一般需要和  src/index.vue 里面的props的key保持一致
-        componentProps: {
-          reanderType: 'canvas',
-          packageType: 'common',
-          datasourcekey: '',
-          option: {
-            title: {
-              text: 'ECharts 入门示例'
-            },
-            tooltip: {},
-            legend: {
-              data: ['销量']
-            },
-            xAxis: {
-              data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
-            },
-            yAxis: {},
-            series: [{
-              name: '销量',
-              type: 'bar',
-              data: [5, 20, 36, 10, 10, 20]
-            }]
-          }
-        },
+        componentProps: {},
       }
     },
     computed: {
