@@ -113,6 +113,7 @@
       }
       .el-tabs__nav-wrap:after {
         background-color: #e4e7ed;
+        box-shadow: none;
       }
     }
   }
