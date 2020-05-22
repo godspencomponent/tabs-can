@@ -71,9 +71,11 @@
       },
       upItem (index) {
         if (index == 0) return
+        const parent = this.componentInfo.tabs || []
         this.componentInfo.tabs.splice(index - 1, 2, parent[index], parent[index-1])
       },
       downItem (index) {
+        const parent = this.componentInfo.tabs || []
         if (index == parent.length - 1) return
         this.componentInfo.tabs.splice(index, 2, parent[index + 1], parent[index])
       },
